@@ -1,0 +1,11 @@
+.gitattributes text eol=lf
+*.eml -text
+*.log -text
+*.pdf -text
+*.png -text
+campaign-smtp.txt -text
+SHA256SUMS -text
+run-summary.json -text
+postfix-configuration.txt -text
+*.py text eol=lf
+*.md text eol=lf

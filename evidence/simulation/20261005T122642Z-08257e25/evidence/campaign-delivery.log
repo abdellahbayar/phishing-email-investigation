@@ -1,0 +1,9 @@
+2026-10-05T12:26:43.032014+00:00 soc-mail-lab postfix/smtpd[1681]: 07C5A1E01FC: client=localhost[127.0.0.1]
+2026-10-05T12:26:43.035520+00:00 soc-mail-lab postfix/cleanup[1685]: 07C5A1E01FC: message-id=<179120320293.1674.8861293320127582421.phishing-lab-20261005T122642Z-08257e25@lab.test>
+2026-10-05T12:26:43.037810+00:00 soc-mail-lab postfix/qmgr[1153]: 07C5A1E01FC: from=<security@account-alerts.test>, size=1269, nrcpt=5 (queue active)
+2026-10-05T12:26:43.048235+00:00 soc-mail-lab postfix/local[1686]: 07C5A1E01FC: to=<alice@lab.test>, relay=local, delay=0.02, delays=0.01/0.01/0/0, dsn=2.0.0, status=sent (delivered to maildir)
+2026-10-05T12:26:43.050774+00:00 soc-mail-lab postfix/local[1687]: 07C5A1E01FC: to=<bob@lab.test>, relay=local, delay=0.02, delays=0.01/0.01/0/0, dsn=2.0.0, status=sent (delivered to maildir)
+2026-10-05T12:26:43.052262+00:00 soc-mail-lab postfix/local[1686]: 07C5A1E01FC: to=<carol@lab.test>, relay=local, delay=0.02, delays=0.01/0.01/0/0, dsn=2.0.0, status=sent (delivered to maildir)
+2026-10-05T12:26:43.054041+00:00 soc-mail-lab postfix/local[1688]: 07C5A1E01FC: to=<edoardo@lab.test>, relay=local, delay=0.03, delays=0.01/0.01/0/0, dsn=2.0.0, status=sent (delivered to maildir)
+2026-10-05T12:26:43.054089+00:00 soc-mail-lab postfix/local[1687]: 07C5A1E01FC: to=<vittorio@lab.test>, relay=local, delay=0.03, delays=0.01/0.01/0/0, dsn=2.0.0, status=sent (delivered to maildir)
+2026-10-05T12:26:43.054112+00:00 soc-mail-lab postfix/qmgr[1153]: 07C5A1E01FC: removed

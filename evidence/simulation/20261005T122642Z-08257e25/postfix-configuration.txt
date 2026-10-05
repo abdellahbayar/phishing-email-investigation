@@ -1,0 +1,5 @@
+inet_interfaces = loopback-only
+default_transport = error
+home_mailbox = Maildir/
+mailbox_command = 
+mydestination = lab.test, $myhostname, soc-mail-lab, localhost.localdomain, localhost

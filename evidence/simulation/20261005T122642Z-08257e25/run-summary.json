@@ -1,0 +1,108 @@
+{
+  "scenario": "Controlled Microsoft impersonation simulation",
+  "run_id": "20261005T122642Z-08257e25",
+  "started_utc": "2026-10-05T12:26:42.932738+00:00",
+  "message_id": "<179120320293.1674.8861293320127582421.phishing-lab-20261005T122642Z-08257e25@lab.test>",
+  "queue_id": "07C5A1E01FC",
+  "hostname": "soc-mail-lab",
+  "os_release": "PRETTY_NAME=\"Ubuntu 24.04.5 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"24.04\"\nVERSION=\"24.04.5 LTS (Noble Numbat)\"\nVERSION_CODENAME=noble\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=noble\nLOGO=ubuntu-logo\n",
+  "postfix_version": "3.8.6",
+  "swaks_version_output": "swaks version 20240103.0\n\n        Copyright (c) 2003-2008,2010-2024 John Jetmore <jj33@pobox.com>\n\n    This program is free software; you can redistribute it and/or modify\n    it under the terms of the GNU General Public License as published by\n    the Free Software Foundation; either version 2 of the License, or\n    (at your option) any later version.\n\n    This program is distributed in the hope that it will be useful,\n    but WITHOUT ANY WARRANTY; without even the implied warranty of\n    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n    GNU General Public License for more details.\n\n    You should have received a copy of the GNU General Public License\n    along with this program; if not, write to the Free Software\n    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.",
+  "configuration": {
+    "inet_interfaces": "loopback-only",
+    "default_transport": "error",
+    "home_mailbox": "Maildir/",
+    "mailbox_command": "",
+    "mydestination": "lab.test, $myhostname, soc-mail-lab, localhost.localdomain, localhost"
+  },
+  "sender": "Microsoft account team <security@account-alerts.test>",
+  "reply_to": "helpdesk@account-review.test",
+  "subject": "[SOC-LAB SIMULATION] Unusual sign-in activity",
+  "visible_to": "alice@lab.test",
+  "visible_cc": "bob@lab.test, edoardo@lab.test",
+  "successful_recipients": [
+    "alice@lab.test",
+    "bob@lab.test",
+    "carol@lab.test",
+    "edoardo@lab.test",
+    "vittorio@lab.test"
+  ],
+  "delivery_records": [
+    {
+      "timestamp": "2026-10-05T12:26:43.048235+00:00",
+      "recipient": "alice@lab.test",
+      "dsn": "2.0.0",
+      "status": "sent (delivered to maildir)"
+    },
+    {
+      "timestamp": "2026-10-05T12:26:43.050774+00:00",
+      "recipient": "bob@lab.test",
+      "dsn": "2.0.0",
+      "status": "sent (delivered to maildir)"
+    },
+    {
+      "timestamp": "2026-10-05T12:26:43.052262+00:00",
+      "recipient": "carol@lab.test",
+      "dsn": "2.0.0",
+      "status": "sent (delivered to maildir)"
+    },
+    {
+      "timestamp": "2026-10-05T12:26:43.054041+00:00",
+      "recipient": "edoardo@lab.test",
+      "dsn": "2.0.0",
+      "status": "sent (delivered to maildir)"
+    },
+    {
+      "timestamp": "2026-10-05T12:26:43.054089+00:00",
+      "recipient": "vittorio@lab.test",
+      "dsn": "2.0.0",
+      "status": "sent (delivered to maildir)"
+    }
+  ],
+  "mailbox_copies": [
+    {
+      "recipient": "alice@lab.test",
+      "source": "/home/alice/Maildir/new/1791203203.V802I2004aM43536.soc-mail-lab",
+      "export": "evidence/campaign-received-alice.eml",
+      "bytes": 1339,
+      "sha256": "3f0b6826fc94fa1bdfa271bcd56ecaf2a8817540256ea85300b110baad804609",
+      "authentication_results": []
+    },
+    {
+      "recipient": "bob@lab.test",
+      "source": "/home/bob/Maildir/new/1791203203.V802I2004bM47889.soc-mail-lab",
+      "export": "evidence/campaign-received-bob.eml",
+      "bytes": 1335,
+      "sha256": "4c72152e5d0d9201ce5c265567c82e344fb61b6807d67e2079ef06f1cbfa7e60",
+      "authentication_results": []
+    },
+    {
+      "recipient": "carol@lab.test",
+      "source": "/home/carol/Maildir/new/1791203203.V802I2004cM48660.soc-mail-lab",
+      "export": "evidence/campaign-received-carol.eml",
+      "bytes": 1339,
+      "sha256": "3c407936cf2f4baf1ef81a63e9d58ce65d04a212afc4cd7d13535cbc87567410",
+      "authentication_results": []
+    },
+    {
+      "recipient": "edoardo@lab.test",
+      "source": "/home/edoardo/Maildir/new/1791203203.V802I2004dM50574.soc-mail-lab",
+      "export": "evidence/campaign-received-edoardo.eml",
+      "bytes": 1343,
+      "sha256": "c263962050468d24edc2737cc3911c64bba6440f85495d2d63cac616bbaa9472",
+      "authentication_results": []
+    },
+    {
+      "recipient": "vittorio@lab.test",
+      "source": "/home/vittorio/Maildir/new/1791203203.V802I2004eM51034.soc-mail-lab",
+      "export": "evidence/campaign-received-vittorio.eml",
+      "bytes": 1345,
+      "sha256": "1e664a4fcb18d22e35fd6fdcaa8fb9bbd3c972b8dd37fecc999eb1cfb3ac0b69",
+      "authentication_results": []
+    }
+  ],
+  "queue_log_record_count": 9,
+  "template_sha256": "8be3f1c49a59f00da3705ff304160af724397e28bde08490809ceffa3245fec8",
+  "interaction_measurement": "Opening, clicking, replies and credential entry were not measured.",
+  "authentication_scope": "No authentication verdicts were injected; local messages do not reproduce archived gateway evaluations."
+}

@@ -1,0 +1,36 @@
+Return-Path: <security@account-alerts.test>
+X-Original-To: carol@lab.test
+Delivered-To: carol@lab.test
+Received: from soc-mail-lab (localhost [127.0.0.1])
+	by soc-mail-lab.mshome.net (Postfix) with ESMTP id 07C5A1E01FC;
+	Mon,  5 Oct 2026 12:26:43 +0000 (UTC)
+From: Microsoft account team <security@account-alerts.test>
+Reply-To: helpdesk@account-review.test
+To: alice@lab.test
+Cc: bob@lab.test, edoardo@lab.test
+Subject: [SOC-LAB SIMULATION] Unusual sign-in activity
+X-Lab-Simulation: true
+X-Lab-Campaign: microsoft-impersonation-01
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Date: Mon, 05 Oct 2026 12:26:42 +0000
+Message-ID: <179120320293.1674.8861293320127582421.phishing-lab-20261005T122642Z-08257e25@lab.test>
+
+Microsoft account security notice
+
+We noticed an unusual sign-in to your account. Review the activity within
+24 hours to prevent restrictions on your account.
+
+Review account activity:
+http://account-review.test/verify
+
+If you did not recognise this activity, reply to this message for help.
+
+Microsoft account team
+
+--- Controlled laboratory simulation ---
+This is a harmless test message. All non-local addresses and the link use
+reserved .test domains. No website, password form or tracking service is
+provided. Do not enter credentials or send this message to real users.
+

@@ -1,71 +1,71 @@
 # Phishing Email Investigation
 
-A manual investigation of a Microsoft account alert using email headers, HTML link inspection and VirusTotal domain reports.
+A phishing investigation combining static analysis of an archived Microsoft impersonation email with a separate, controlled campaign delivered to five local mailboxes.
 
-## Verdict
+## Results
 
-**Phishing with Microsoft brand impersonation.** The message presents itself as a Microsoft security notification, but replies and all three embedded action links point to an unrelated Gmail mailbox. A hidden external image is consistent with a tracking pixel.
+- **Archived sample:** phishing using Microsoft brand impersonation and reply redirection. All three action links are `mailto:` links to an unrelated Gmail mailbox; a hidden external image is consistent with tracking. No web sign-in page, password form or successful credential theft was observed.
+- **Local simulation:** five confirmed Maildir deliveries. Alice, Bob and Edoardo appear in To/Cc; Carol and Vittorio are identified in the SMTP envelope and server records.
+- **Limits:** the original campaign's recipients remain unknown. Opening, clicking, replies, credential entry and compromise were not measured in the local simulation.
 
-No sign-in page, password request or successful credential theft was observed in this sample.
+## Reports
 
-## Investigation
+- [Investigation report](docs/Phishing-Campaign-Investigation-Abdellah-Bayar.pdf) - verdict, archived evidence, simulation findings, recipient scope and recommended response.
+- [Reproduction guide](docs/Phishing-Campaign-Lab-Reproduction-Guide.pdf) - environment, technologies, commands, verification and evidence export.
+- [Investigation in Markdown](docs/Investigation.md)
+- [Reproduction guide in Markdown](docs/Reproduction-Guide.md)
 
-Sample: `sample-10.eml` from the public [Phishing Pot collection](https://github.com/rf-peixoto/phishing_pot/blob/097878eab3043ced70fde2ce0fb3b660fb58717e/email/sample-10.eml). Tools: Notepad and VirusTotal. The email was inspected as text; its links and external image were not opened.
+## Actual local run
 
-| Evidence | Recorded value | Interpretation |
+Run: `20261005T122642Z-08257e25`. Queue ID: `07C5A1E01FC`.
+
+Message-ID:
+
+```text
+<179120320293.1674.8861293320127582421.phishing-lab-20261005T122642Z-08257e25@lab.test>
+```
+
+| Recipient | Visible header | Delivered 5 October 2026, UTC |
 |---|---|---|
-| Display name | Microsoft account team | Claims to represent Microsoft |
-| From address | `no-reply@access-accsecurity[.]com` | Differs from Microsoft's documented account alert sender |
-| Reply-To | `sotrecognizd@gmail[.]com` | Replies go to a separate Gmail mailbox |
-| SMTP MAIL FROM domain | `thcultarfdes[.]co.uk` | Distinct from the visible From domain |
-| Sending server IP | `89.144.44.2` | Recorded in the receiving gateway's headers |
-| Three `href` links | `mailto:` to the Reply-To mailbox, also in CC | Prepare email drafts; no web login destination observed |
-| Hidden image | `thebandalisty[.]com/track/...`, 1 x 1, `visibility:hidden` | Consistent with possible email tracking |
-| Body claim | Russia/Moscow, `103.225.77.255` | Unverified sign-in details supplied by the message |
+| alice@lab.test | To | 12:26:43.048235 |
+| bob@lab.test | Cc | 12:26:43.050774 |
+| carol@lab.test | Absent | 12:26:43.052262 |
+| edoardo@lab.test | Cc | 12:26:43.054041 |
+| vittorio@lab.test | Absent | 12:26:43.054089 |
 
-The receiving gateway recorded the external SMTP handoff on **8 September 2023 at 05:47:04 UTC**. The body IP is distinct from the sending server IP; neither identifies a person or proves account compromise.
+Every delivery has `dsn=2.0.0` and `status=sent (delivered to maildir)`. Five matching received copies were preserved and their hashes verified after export. Nine native queue log records correlate the Message-ID with queue processing and final deliveries. Queue acceptance alone was not used as proof of mailbox delivery.
 
-### Email authentication
+Carol and Vittorio have blind-copy-equivalent delivery in this deliberately configured simulation. No Bcc header is included. In production, forwarding or distribution lists can also result in recipients absent from To/Cc.
 
-| Check | Result in the archived headers | Interpretation |
-|---|---|---|
-| SPF | `none` | No SPF policy was found for the SMTP sender domain |
-| DKIM | `none` | No DKIM signature was found |
-| DMARC | `permerror`, `action=none` | Permanent evaluation error; the exact cause is unknown |
+## Technologies
 
-These recorded results are different from `fail`. They add context to the investigation and do not, on their own, establish phishing. DNS authentication was not re-evaluated.
+Windows Hyper-V; Ubuntu Server 24.04.5 LTS; Postfix 3.8.6; Swaks 20240103.0; rsyslog; Maildir; OpenSSH/SCP; Python 3; SHA-256; Notepad; existing VirusTotal domain reports.
 
-### Domain reputation
+The VM uses 4 GB RAM, 2 vCPUs and a 40 GB virtual disk. Postfix listens on loopback only with `lab.test` configured for local delivery and `default_transport=error`. The VM has installation connectivity through the Hyper-V Default Switch.
 
-Existing VirusTotal reports consulted during the lab, recorded on **5 October 2026**:
+## Repository map
 
-| Domain | Role | Malicious detections | Last analysis, as displayed |
-|---|---|---|---|
-| `access-accsecurity[.]com` | Visible sender | 0/91 | 2 months ago |
-| `thcultarfdes[.]co.uk` | SMTP sender | 0/91 | 26 days ago |
-| `thebandalisty[.]com` | Hidden image host | **9/91** | 4 days ago |
+```text
+docs/                 Investigation and reproduction reports
+lab/                  Labelled template and local campaign runner
+evidence/archive/     Captured VirusTotal reports
+evidence/simulation/  Actual run summary, configuration and native evidence
+SHA256SUMS            Package integrity manifest
+```
 
-The nine red classifications comprise seven **Phishing** and two **Malicious** results. ESET reports **Suspicious** separately. A 0/91 result does not establish safety, and the 2026 reports do not establish the domains' reputation when the email was sent in 2023.
+`lab/run_campaign.py` validates the dedicated VM setup, submits one labelled message to five local test accounts and exports the real evidence. It requires sudo to read recipient Maildirs and mail.log. It stops on unexpected hosts, recipients, destinations or settings. It preserves the original mailbox files.
 
-## Recommended response
+## Reproduce
 
-1. Avoid replying, clicking links or loading external images. Preserve the original email and report it through the organisation's phishing reporting process.
-2. Have the security team quarantine or remove confirmed matching messages and apply targeted blocks after checking the indicators. Blocking all Gmail traffic would be too broad.
-3. Search mail-flow records for related messages and establish who received or interacted with them. If sensitive information was disclosed or account compromise is suspected, investigate sign-in activity and secure the affected account.
+Follow the [reproduction guide](docs/Reproduction-Guide.md). It includes Windows and Ubuntu commands and explains their execution context. Each new run produces a fresh Date, Message-ID, queue ID and result directory. Document those actual values rather than copying the reference run.
 
-For the archived phishing sample, these are proposed actions. Mailbox searches, blocking and remediation were not performed against its original environment. Its recipient scope, user interaction and account impact remain unknown.
+The simulation uses reserved `.test` domains. No live sign-in website, credential form or tracking service is provided. Authentication-Results are not inserted; the local simulation does not evaluate the archived email's SPF/DKIM/DMARC results.
 
-## Documentation
+From inside the native run's evidence directory on Ubuntu, verify the eight exported data files with `sha256sum -c SHA256SUMS`. From the repository root, `sha256sum -c SHA256SUMS` verifies the packaged files. Git attributes preserve native evidence bytes.
 
-- [Investigation report](Phishing-Email-Investigation-Abdellah-Bayar.pdf)
-- [VirusTotal evidence: visible sender](01-virustotal-access-accsecurity.png)
-- [VirusTotal evidence: hidden image domain](03-virustotal-thebandalisty.png)
+## Archived evidence and provenance
 
-The visible-sender screenshot is cropped to the report area, preserving the displayed security results. The SMTP domain result was recorded from the report text; no screenshot was captured for that lookup.
-
-## Reproduce the investigation
-
-Use the pinned [source sample](https://github.com/rf-peixoto/phishing_pot/blob/097878eab3043ced70fde2ce0fb3b660fb58717e/email/sample-10.eml) and open it in a text editor. Compare `From` and `Reply-To`, inspect `Authentication-Results` and `Received`, then search the HTML for `href=` and `<img`. Record each destination and its role before checking existing domain reports. Keep observations separate from assumptions in the verdict.
+The original `sample-10.eml` is linked from the [Phishing Pot collection at a pinned revision](https://github.com/rf-peixoto/phishing_pot/blob/097878eab3043ced70fde2ce0fb3b660fb58717e/email/sample-10.eml); it is not redistributed here. It was not received in my own mailbox. The collection anonymises recipient information as `phishing@pot`; see the [upstream licence](https://github.com/rf-peixoto/phishing_pot/blob/097878eab3043ced70fde2ce0fb3b660fb58717e/LICENSE).
 
 Original sample SHA-256:
 
@@ -73,11 +73,16 @@ Original sample SHA-256:
 4fbf4c3d80aba156c59004c12c83ff53dd64c9cf7b7a6029e98fe1da0760783a
 ```
 
-## Sources
+The archived gateway records SPF `none`, DKIM `none` and DMARC `permerror; action=none`. These are not `fail`; the exact DMARC error cause is unknown. DNS authentication was not re-evaluated.
 
-The sample comes from **rf-peixoto/Phishing Pot**, revision `097878eab3043ced70fde2ce0fb3b660fb58717e`; see the [upstream licence](https://github.com/rf-peixoto/phishing_pot/blob/097878eab3043ced70fde2ce0fb3b660fb58717e/LICENSE). The collection anonymises recipient information as `phishing@pot`. That placeholder is not evidence of the sender's original wording, and the sample was not received in my own mailbox.
+VirusTotal results recorded on **5 October 2026**: visible sender domain 0/91, SMTP sender domain 0/91, hidden image domain 9/91. The nine red classifications comprise seven Phishing and two Malicious; ESET Suspicious is separate. A 0/91 score does not establish safety. The 2026 reports do not establish reputation at the time of the 2023 message.
 
-- [Microsoft: unusual sign-in notifications](https://support.microsoft.com/en-us/accounts-billing/security/what-happens-if-there-s-an-unusual-sign-in-to-your-account)
-- [Microsoft: email authentication results](https://learn.microsoft.com/en-us/defender-office-365/email-authentication-troubleshoot)
-- [RFC 7489: DMARC result meanings](https://www.rfc-editor.org/rfc/rfc7489.html#appendix-C)
-- [VirusTotal: domain report fields](https://docs.virustotal.com/reference/domains-object)
+Two captured reports are included under [evidence/archive](evidence/archive). The visible sender screenshot is cropped to the report area; the SMTP sender result was recorded from text and has no screenshot. The original sample and the new simulation have distinct message identifiers and evidence.
+
+## Response
+
+Preserve and report the message, investigate delivery scope, quarantine confirmed matches and validate targeted blocks. Use separate interaction and sign-in telemetry if account impact is suspected. In this exercise, delivery investigation and evidence preservation were completed; quarantine, blocking and account changes remain recommendations.
+
+The earlier [Postfix Recipient Tracing Lab](https://github.com/abdellahbayar/postfix-recipient-tracing-lab) remains a separate foundational exercise.
+
+Technical sources are linked in both reports.
