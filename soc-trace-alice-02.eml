@@ -1,0 +1,17 @@
+Return-Path: <labadmin@lab.test>
+X-Original-To: alice@lab.test
+Delivered-To: alice@lab.test
+Received: from soc-mail-lab (localhost [127.0.0.1])
+	by soc-mail-lab.mshome.net (Postfix) with ESMTP id 20B261E01F8;
+	Mon,  5 Oct 2026 09:20:34 +0000 (UTC)
+Date: Mon, 05 Oct 2026 09:19:03 +0000
+To: alice@lab.test
+From: labadmin@lab.test
+Subject: [SOC-LAB] Recipient tracing test 02
+Message-Id: <20261005091903.003053@soc-mail-lab>
+X-Mailer: swaks v20240103.0 jetmore.org/john/code/swaks/
+Cc: bob@lab.test, edoardo@lab.test
+
+Controlled lab message for recipient tracing. No action is required.
+
+

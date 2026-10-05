@@ -1,0 +1,45 @@
+=== Trying 127.0.0.1:25...
+=== Connected to 127.0.0.1.
+<-  220 soc-mail-lab.mshome.net ESMTP Postfix (Ubuntu)
+ -> EHLO soc-mail-lab
+<-  250-soc-mail-lab.mshome.net
+<-  250-PIPELINING
+<-  250-SIZE 10240000
+<-  250-VRFY
+<-  250-ETRN
+<-  250-STARTTLS
+<-  250-ENHANCEDSTATUSCODES
+<-  250-8BITMIME
+<-  250-DSN
+<-  250-SMTPUTF8
+<-  250 CHUNKING
+ -> MAIL FROM:<labadmin@lab.test>
+<-  250 2.1.0 Ok
+ -> RCPT TO:<alice@lab.test>
+<-  250 2.1.5 Ok
+ -> RCPT TO:<bob@lab.test>
+<-  250 2.1.5 Ok
+ -> RCPT TO:<carol@lab.test>
+<-  250 2.1.5 Ok
+ -> RCPT TO:<edoardo@lab.test>
+<-  250 2.1.5 Ok
+ -> RCPT TO:<vittorio@lab.test>
+<-  250 2.1.5 Ok
+ -> DATA
+<-  354 End data with <CR><LF>.<CR><LF>
+ -> Date: Mon, 05 Oct 2026 09:19:03 +0000
+ -> To: alice@lab.test
+ -> From: labadmin@lab.test
+ -> Subject: [SOC-LAB] Recipient tracing test 02
+ -> Message-Id: <20261005091903.003053@soc-mail-lab>
+ -> X-Mailer: swaks v20240103.0 jetmore.org/john/code/swaks/
+ -> Cc: bob@lab.test, edoardo@lab.test
+ -> 
+ -> Controlled lab message for recipient tracing. No action is required.
+ -> 
+ -> 
+ -> .
+<-  250 2.0.0 Ok: queued as 20B261E01F8
+ -> QUIT
+<-  221 2.0.0 Bye
+=== Connection closed with remote host.

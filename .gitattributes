@@ -1,0 +1,4 @@
+# Preserve exported evidence byte for byte.
+soc-trace-*.eml -text
+soc-trace-*.log -text
+soc-trace-*.txt -text

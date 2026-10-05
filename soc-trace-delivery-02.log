@@ -1,0 +1,9 @@
+2026-10-05T09:20:34.134061+00:00 soc-mail-lab postfix/smtpd[3064]: 20B261E01F8: client=localhost[127.0.0.1]
+2026-10-05T09:20:34.137417+00:00 soc-mail-lab postfix/cleanup[3067]: 20B261E01F8: message-id=<20261005091903.003053@soc-mail-lab>
+2026-10-05T09:20:34.139845+00:00 soc-mail-lab postfix/qmgr[2967]: 20B261E01F8: from=<labadmin@lab.test>, size=509, nrcpt=5 (queue active)
+2026-10-05T09:20:34.148495+00:00 soc-mail-lab postfix/local[3068]: 20B261E01F8: to=<alice@lab.test>, relay=local, delay=0.02, delays=0.01/0.01/0/0, dsn=2.0.0, status=sent (delivered to maildir)
+2026-10-05T09:20:34.150859+00:00 soc-mail-lab postfix/local[3068]: 20B261E01F8: to=<bob@lab.test>, relay=local, delay=0.02, delays=0.01/0.01/0/0, dsn=2.0.0, status=sent (delivered to maildir)
+2026-10-05T09:20:34.152450+00:00 soc-mail-lab postfix/local[3069]: 20B261E01F8: to=<carol@lab.test>, relay=local, delay=0.02, delays=0.01/0.01/0/0, dsn=2.0.0, status=sent (delivered to maildir)
+2026-10-05T09:20:34.153637+00:00 soc-mail-lab postfix/local[3068]: 20B261E01F8: to=<edoardo@lab.test>, relay=local, delay=0.02, delays=0.01/0.01/0/0, dsn=2.0.0, status=sent (delivered to maildir)
+2026-10-05T09:20:34.153883+00:00 soc-mail-lab postfix/local[3070]: 20B261E01F8: to=<vittorio@lab.test>, relay=local, delay=0.02, delays=0.01/0.01/0/0, dsn=2.0.0, status=sent (delivered to maildir)
+2026-10-05T09:20:34.153914+00:00 soc-mail-lab postfix/qmgr[2967]: 20B261E01F8: removed

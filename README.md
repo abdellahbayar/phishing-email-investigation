@@ -1,6 +1,13 @@
 # Phishing Email Investigation
 
-A manual investigation of a Microsoft account alert using email headers, HTML link inspection and VirusTotal domain reports.
+A manual investigation of a Microsoft account alert using email headers, HTML link inspection and VirusTotal domain reports, followed by a controlled recipient-tracing exercise on a local Postfix server.
+
+## Project contents
+
+| Exercise | Result | Documentation |
+|---|---|---|
+| Archived phishing email | Microsoft brand impersonation; action links prepare drafts to an unrelated mailbox | [Phishing investigation report](Phishing-Email-Investigation-Abdellah-Bayar.pdf) |
+| Local recipient tracing | Five confirmed mailbox deliveries, including two recipients absent from the visible headers | [Tracing findings](Recipient-Tracing.md) · [Reproduction guide](Recipient-Tracing-Reproduction-Guide.md) |
 
 ## Verdict
 
@@ -53,7 +60,19 @@ The nine red classifications comprise seven **Phishing** and two **Malicious** r
 2. Have the security team quarantine or remove confirmed matching messages and apply targeted blocks after checking the indicators. Blocking all Gmail traffic would be too broad.
 3. Search mail-flow records for related messages and establish who received or interacted with them. If sensitive information was disclosed or account compromise is suspected, investigate sign-in activity and secure the affected account.
 
-These are proposed actions. This lab did not perform mailbox searches, blocking or remediation. Recipient scope, user interaction and account impact remain unknown.
+For the archived phishing sample, these are proposed actions. Mailbox searches, blocking and remediation were not performed against its original environment. Its recipient scope, user interaction and account impact remain unknown.
+
+## Recipient tracing extension
+
+A separate benign test on a local Postfix server established **five successful deliveries**. Alice's received copy lists three visible recipients; the mail logs identify two additional blind-copy recipients in the controlled setup.
+
+- [Recipient tracing findings and evidence](Recipient-Tracing.md)
+- [Step-by-step reproduction guide](Recipient-Tracing-Reproduction-Guide.md)
+- [SHA-256 checksums of the four exported evidence files](Recipient-Tracing-Checksums.sha256)
+
+The repository includes the prepared message, Alice's received copy, the SMTP transcript and the delivery log extract. Git attributes preserve their original line endings when the repository is cloned.
+
+This extension demonstrates delivery tracing with local server logs. The recipient scope and user interaction for the archived phishing sample remain unknown.
 
 ## Documentation
 
@@ -61,7 +80,7 @@ These are proposed actions. This lab did not perform mailbox searches, blocking 
 - [VirusTotal evidence: visible sender](01-virustotal-access-accsecurity.png)
 - [VirusTotal evidence: hidden image domain](03-virustotal-thebandalisty.png)
 
-The screenshots are preserved as supplied. The SMTP domain result was recorded from the report text; no screenshot was captured for that lookup.
+The visible-sender screenshot is cropped to the report area, preserving the displayed security results. The SMTP domain result was recorded from the report text; no screenshot was captured for that lookup.
 
 ## Reproduce the investigation
 
